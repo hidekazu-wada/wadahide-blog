@@ -16,11 +16,9 @@ const posts = (await getCollection('blog'))
 	>
 		<div>
 			<p class="block text-3xl opacity-70 mt-9 mb-4">Welcome to</p>
-			<h1 class="text-8xl font-bold leading-none">Saral Theme</h1>
+			<h1 class="text-8xl font-bold leading-none">Wadahide Blog</h1>
 		</div>
-		<p class="text-2xl max-w-2xl font-light leading-normal">
-			A simple theme for personal blog sites, created for Astro framework.
-		</p>
+		<p class="text-2xl max-w-2xl font-light leading-normal">個人ブログです</p>
 		<div class="flex flex-wrap gap-8">
 			{
 				SocialLinks.map((link) => (
@@ -52,10 +50,7 @@ const posts = (await getCollection('blog'))
 	<section class="app-container py-42 grid lg:grid-cols-2 gap-28 lg:gap-10">
 		<div class="space-y-6">
 			<h2 class="section-title">About Me</h2>
-			<p class="text-lg max-w-xl pb-4">
-				A brief introduction about yourself. You can include your profession,
-				hobbies, interests, or anything you'd like visitors to know about you.
-			</p>
+			<p class="text-lg max-w-xl pb-4">自己紹介はこちらを御覧ください</p>
 			<a class="btn-secondary" href={`${SITE_BASE}/about`}
 				>Go to About
 				<Icon size={20} name="mdi:arrow-right" />
@@ -63,22 +58,20 @@ const posts = (await getCollection('blog'))
 		</div>
 		<div class="space-y-6">
 			<h2 class="section-title">Get in touch</h2>
-			<p class="text-lg max-w-xl">
-				Use the buttons below for my resume & email.
-			</p>
+			<p class="text-lg max-w-xl">メールでのお問い合わせはこちらからどうぞ</p>
 			<div class="flex flex-wrap mt-auto space-x-4">
 				<a
 					class="btn-primary"
-					href="mailto:example@email.com"
+					href="mailto:info@wadahide.com"
 					download
 					target="_blank"
 					>Get in touch
 					<Icon height={20} name="mdi:email" />
 				</a>
-				<a class="btn-secondary" href="https://example.com" target="_blank"
+				<!-- <a class="btn-secondary" href="https://example.com" target="_blank"
 					>Download Resume
 					<Icon height={20} name="mdi:arrow-collapse-down" />
-				</a>
+				</a> -->
 			</div>
 		</div>
 	</section>
