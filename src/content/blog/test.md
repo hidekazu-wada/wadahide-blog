@@ -6,7 +6,7 @@ pubDate: 'Aug 3 2025'
 coverImageCredit: ''
 ---
 
-大東亜戦争について
+大東亜戦争について学びます
 
 # hoge
 
