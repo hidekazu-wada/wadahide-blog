@@ -39,3 +39,11 @@ export const WebsiteLinks = [
 		url: 'about',
 	},
 ]
+
+// Google Analytics 4 測定ID (例: 'G-XXXXXXXXXX')
+// 環境変数から取得するか、直接設定してください
+export const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID || ''
+
+// Google Search Console 検証用メタタグのコンテンツ
+// 環境変数から取得するか、直接設定してください
+export const GOOGLE_SITE_VERIFICATION = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION || ''

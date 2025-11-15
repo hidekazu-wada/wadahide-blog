@@ -1,5 +1,5 @@
 ---
-import { SITE_BASE } from '@/consts'
+import { SITE_BASE, GA_MEASUREMENT_ID, GOOGLE_SITE_VERIFICATION } from '@/consts'
 import '../styles/global.css'
 
 interface Props {
@@ -67,3 +67,27 @@ const { title, description, image = `${SITE_BASE}/saral-og.jpg` } = Astro.props
 	title="Saral Theme RSS Feed"
 	href={new URL('rss.xml', Astro.site)}
 />
+
+<!-- Google Search Console Verification -->
+{GOOGLE_SITE_VERIFICATION && (
+	<meta name="google-site-verification" content={GOOGLE_SITE_VERIFICATION} />
+)}
+
+<!-- Google Analytics 4 -->
+{GA_MEASUREMENT_ID && (
+	<>
+		<script
+			type="text/partytown"
+			src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+		/>
+		<script
+			type="text/partytown"
+			set:html={`
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('js', new Date());
+				gtag('config', '${GA_MEASUREMENT_ID}');
+			`}
+		/>
+	</>
+)}
