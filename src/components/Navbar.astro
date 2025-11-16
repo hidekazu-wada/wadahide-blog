@@ -7,13 +7,14 @@ import LogoSVG from '../assets/logo.svg'
 
 const normalizeHref = (url: string) => {
         const base = SITE_BASE.endsWith('/') ? SITE_BASE.slice(0, -1) : SITE_BASE
+        const hasBase = Boolean(base)
 
         if (!url || url === '/') {
-                return `${base}/` || '/'
+                return hasBase ? `${base}/` : '/'
         }
 
         const sanitizedPath = url.startsWith('/') ? url.slice(1) : url
-        return `${base}/${sanitizedPath}` || `/${sanitizedPath}`
+        return hasBase ? `${base}/${sanitizedPath}` : `/${sanitizedPath}`
 }
 ---
 
