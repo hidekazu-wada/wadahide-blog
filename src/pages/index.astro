@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import { SITE_BASE, SocialLinks } from '../consts'
+import { Categories, SITE_BASE, SITE_TITLE, SocialLinks } from '../consts'
 import { Icon } from 'astro-icon/components'
 import BlogCard from '../components/BlogCard.astro'
 import { getCollection } from 'astro:content'
@@ -10,15 +10,32 @@ const posts = (await getCollection('blog'))
 	.slice(0, 4)
 ---
 
-<BaseLayout title="Wadahide Blog">
+<BaseLayout title={SITE_TITLE}>
 	<main
 		class="app-container flex flex-col gap-12 justify-center py-36 md:py-48 pt-44 md:pt-56 relative"
 	>
 		<div>
-			<p class="block text-3xl opacity-70 mt-9 mb-4">Welcome to</p>
-			<h1 class="text-8xl font-bold leading-none">Wadahide Blog</h1>
+			<p class="block text-2xl md:text-3xl opacity-70 mt-9 mb-4">
+				やりたいことをやりたいようにやってみる
+			</p>
+			<h1 class="text-6xl md:text-8xl font-bold leading-none">
+				Wadahide Experiments
+			</h1>
 		</div>
-		<p class="text-2xl max-w-2xl font-light leading-normal">個人ブログです</p>
+		<p class="text-2xl max-w-3xl font-light leading-normal">
+			元ダイビングインストラクターで現役エンジニア、自然のそばで暮らす父としての挑戦記録。
+			海・筋トレ・コード・暮らし・家族・本から得た気づきを丁寧に残していきます。
+		</p>
+		<div class="flex flex-wrap gap-4">
+			<a class="btn-primary" href="/blog">
+				最新記事を読む
+				<Icon size={20} name="mdi:arrow-right" />
+			</a>
+			<a class="btn-secondary" href={`${SITE_BASE}/about`}>
+				わたしについて
+				<Icon size={20} name="mdi:account-circle-outline" />
+			</a>
+		</div>
 		<div class="flex flex-wrap gap-8">
 			{
 				SocialLinks.map((link) => (
@@ -34,6 +51,43 @@ const posts = (await getCollection('blog'))
 		</div>
 	</main>
 
+	<section class="app-container pt-4 pb-8 space-y-10">
+		<div class="space-y-4">
+			<p class="text-sm uppercase tracking-[0.3em] text-primary">Fields</p>
+			<h2 class="section-title">挑戦している領域</h2>
+			<p class="text-lg max-w-3xl">
+				海・筋トレ・コード・自然の暮らし・家族・読書・実験。興味のあるカテゴリから読み始められるようにしました。
+			</p>
+		</div>
+		<div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+			{
+				Categories.filter((cat) => cat.showOnHome !== false).map((category) => (
+					<a
+						class="border border-foreground/10 rounded-3xl p-6 flex flex-col gap-4 hover:-translate-y-1 hover:border-foreground/40 transition-transform duration-200"
+						href={`${SITE_BASE}/category/${category.slug}`}
+					>
+						<span class="text-xs uppercase tracking-[0.3em] text-primary">
+							{category.tagline}
+						</span>
+						<h3 class="text-2xl font-semibold">{category.name}</h3>
+						<p class="text-base leading-relaxed opacity-80">
+							{category.summary}
+						</p>
+						<ul class="text-sm opacity-70 space-y-1">
+							{category.focus.map((topic) => (
+								<li>・{topic}</li>
+							))}
+						</ul>
+						<span class="mt-auto text-sm font-medium inline-flex items-center gap-2">
+							{category.ctaLabel}
+							<Icon size={18} name="mdi:arrow-top-right" />
+						</span>
+					</a>
+				))
+			}
+		</div>
+	</section>
+
 	<!-- Recent Posts Section -->
 	<section class="app-container">
 		<h2 class="section-title">Recent Posts</h2>
@@ -48,14 +102,14 @@ const posts = (await getCollection('blog'))
 
 	<!-- Recent Posts Section -->
 	<section class="app-container py-42 grid lg:grid-cols-2 gap-28 lg:gap-10">
-                <div class="space-y-6">
-                        <h2 class="section-title">About Me</h2>
-                        <p class="text-lg max-w-xl pb-4">自己紹介ページは現在準備中です。</p>
-                        <a class="btn-secondary" href={`${SITE_BASE}/about`}
-                                >Go to About
-                                <Icon size={20} name="mdi:arrow-right" />
-                        </a>
-                </div>
+		<div class="space-y-6">
+			<h2 class="section-title">About Me</h2>
+			<p class="text-lg max-w-xl pb-4">自己紹介ページは現在準備中です。</p>
+			<a class="btn-secondary" href={`${SITE_BASE}/about`}
+				>Go to About
+				<Icon size={20} name="mdi:arrow-right" />
+			</a>
+		</div>
 		<div class="space-y-6">
 			<h2 class="section-title">Get in touch</h2>
 			<p class="text-lg max-w-xl">メールでのお問い合わせはこちらからどうぞ</p>

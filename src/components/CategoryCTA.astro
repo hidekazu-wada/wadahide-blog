@@ -1,0 +1,52 @@
+---
+import { Categories, type CategorySlug } from '../consts'
+import { Icon } from 'astro-icon/components'
+
+type Props = {
+	category?: CategorySlug
+	title?: string
+	description?: string
+	label?: string
+	href?: string
+}
+
+const { category, title, description, label, href } = Astro.props as Props
+
+const categoryData = category
+	? Categories.find((cat) => cat.slug === category)
+	: undefined
+
+const ctaTitle = title ?? categoryData?.name ?? '次の一歩を相談する'
+const ctaDescription =
+	description ?? categoryData?.ctaDescription ?? categoryData?.summary
+const ctaLabel = label ?? categoryData?.ctaLabel ?? '問い合わせる'
+const ctaHref = href ?? categoryData?.ctaHref ?? '/contact'
+
+const target =
+	ctaHref?.startsWith('http') || ctaHref?.startsWith('mailto') ? '_blank' : '_self'
+---
+
+{
+	categoryData || (title && href) ? (
+		<section class="app-container py-20">
+			<div
+				class="rounded-[32px] border border-foreground/10 bg-foreground/5 dark:bg-white/5 px-8 py-10 flex flex-col gap-6 md:flex-row md:items-center md:gap-12"
+			>
+				<div class="flex-1 space-y-3">
+					<p class="text-xs uppercase tracking-[0.3em] text-primary">
+						{categoryData?.tagline ?? 'Connect'}
+					</p>
+					<h3 class="text-3xl font-semibold">{ctaTitle}</h3>
+					{ctaDescription && (
+						<p class="text-lg leading-relaxed opacity-85">{ctaDescription}</p>
+					)}
+				</div>
+				<a class="btn-primary w-fit" href={ctaHref} target={target}>
+					{ctaLabel}
+					<Icon size={20} name="mdi:arrow-right" />
+				</a>
+			</div>
+		</section>
+	) : null
+}
+

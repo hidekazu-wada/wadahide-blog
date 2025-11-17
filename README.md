@@ -16,6 +16,38 @@ View in Astro themes at [https://astro.build/themes/details/saral/](https://astr
 
 Derived from [yashjawale.github.io](https://yashjawale.github.io)
 
+## Custom categories & writing template
+
+The blog is organized around the following slugs defined in `src/consts.ts`:
+
+| Slug         | Name          | Notes                                  |
+| ------------ | ------------- | -------------------------------------- |
+| `dive`       | Dive Life     | 安全と恐怖克服、海外ショップ運営       |
+| `strength`   | Strength Lab  | 週6筋トレの分割・栄養ログ              |
+| `code`       | Code & Teach  | プログラミング講師・現役エンジニア視点 |
+| `nature`     | Nature Living | 自然豊かな地域での暮らし方             |
+| `family`     | Family & Home | 夫婦生活、子育て、家づくり             |
+| `books`      | Books & Ideas | 読書ログと実践メモ                     |
+| `playground` | Playground    | 実験メモ・旅・新企画の下書き           |
+
+Each article should declare its category (and optional CTA overrides) in the frontmatter:
+
+```
+---
+title: 'タイトル'
+description: 'ディスクリプション'
+pubDate: '11 17 2025'
+coverImageCredit: ''
+category: 'dive'
+ctaTitle: 'カスタムCTAタイトル (任意)'
+ctaDescription: 'CTA文章 (任意)'
+ctaLabel: 'ボタン文言 (任意)'
+ctaHref: '/contact'
+---
+```
+
+If no CTA overrides are provided, the defaults from the category definition are used. New categories can be added by updating `Categories` in `src/consts.ts`; the navigation、トップページのカード、カテゴリページ、記事CTAが自動で同期されます。
+
 ## Features
 
 - Image optimization on build

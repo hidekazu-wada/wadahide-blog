@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import BlogCard from '../../components/BlogCard.astro'
+import { Categories, SITE_TITLE } from '../../consts'
+import { Icon } from 'astro-icon/components'
+import { getCollection } from 'astro:content'
+
+export async function getStaticPaths() {
+	return Categories.map((category) => ({
+		params: { category: category.slug },
+		props: { category },
+	}))
+}
+
+const { category } = Astro.props
+
+const posts = (await getCollection('blog')).filter(
+	(entry) => entry.data.category === category.slug
+)
+---
+
+<BaseLayout title={`${category.name} | ${SITE_TITLE}`}>
+	<section class="app-container flex flex-col gap-6 py-32 md:py-40">
+		<p class="text-xs uppercase tracking-[0.4em] text-primary">
+			{category.tagline}
+		</p>
+		<h1 class="text-5xl md:text-6xl font-bold">{category.name}</h1>
+		<p class="text-xl max-w-3xl leading-relaxed opacity-90">
+			{category.description}
+		</p>
+		<div class="flex flex-wrap gap-3">
+			{
+				category.focus.map((topic) => (
+					<span class="px-4 py-2 rounded-full border border-foreground/15 text-sm">
+						{topic}
+					</span>
+				))
+			}
+		</div>
+		<a
+			class="btn-secondary w-fit"
+			href={category.ctaHref}
+			target={category.ctaHref.startsWith('http') ||
+			category.ctaHref.startsWith('mailto')
+				? '_blank'
+				: '_self'}
+		>
+			{category.ctaLabel}
+			<Icon size={20} name="mdi:arrow-right" />
+		</a>
+	</section>
+
+	<section class="app-container pb-24 space-y-6">
+		<h2 class="section-title">{category.name}の記事</h2>
+		{
+			posts.length ? (
+				<div class="posts-grid-container">
+					{posts.map((post) => (
+						<BlogCard post={post} />
+					))}
+				</div>
+			) : (
+				<p class="text-lg opacity-75">
+					まだこのカテゴリの記事はありません。これから順次公開していきます。
+				</p>
+			)
+		}
+	</section>
+</BaseLayout>
