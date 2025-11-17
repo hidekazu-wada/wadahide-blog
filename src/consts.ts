@@ -60,7 +60,7 @@ export const Categories: CategoryDefinition[] = [
 	{
 		slug: 'code',
 		name: 'Code & Teach',
-		tagline: '現役エンジニア × 講師',
+		tagline: '現役エンジニア × プログラミング講師',
 		description:
 			'講師経験と現場での開発を掛け合わせ、学習ロードマップや案件の進め方を記録します。',
 		summary: '指導ノウハウ、現場視点、学習プラン、ツール紹介。',
