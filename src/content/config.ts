@@ -14,6 +14,7 @@ const blog = defineCollection({
 		ctaDescription: z.string().optional(),
 		ctaLabel: z.string().optional(),
 		ctaHref: z.string().optional(),
+		draft: z.boolean().default(false),
 	}),
 })
 

@@ -14,8 +14,9 @@ export async function getStaticPaths() {
 
 const { category } = Astro.props
 
-const posts = (await getCollection('blog')).filter(
-	(entry) => entry.data.category === category.slug
+const posts = await getCollection(
+	'blog',
+	({ data }) => data.draft !== true && data.category === category.slug
 )
 ---
 

@@ -10,6 +10,7 @@ ctaTitle: 'CTAタイトル（任意）'
 ctaDescription: 'CTA本文（任意）'
 ctaLabel: 'CTAボタン文言（任意）'
 ctaHref: '/contact'
+draft: true
 ---
 
 ## この記事で伝えたいこと（導入）
