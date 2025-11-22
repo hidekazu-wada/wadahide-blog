@@ -9,7 +9,7 @@ category: 'dive'
 ctaTitle: 'CTAタイトル（任意）'
 ctaDescription: 'CTA本文（任意）'
 ctaLabel: 'CTAボタン文言（任意）'
-ctaHref: '/contact'
+ctaHref: 'mailto:info@wadahide.com'
 draft: true
 ---
 

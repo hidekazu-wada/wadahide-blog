@@ -23,11 +23,17 @@ const {
 	headings,
 	slug,
 	remarkPluginFrontmatter,
+	category,
+	ctaTitle,
+	ctaDescription,
+	ctaLabel,
+	ctaHref,
 } = Astro.props
 
 import BaseLayout from './BaseLayout.astro'
 import { Image } from 'astro:assets'
 import { Icon } from 'astro-icon/components'
+import CategoryCTA from '../components/CategoryCTA.astro'
 
 const blogImages = import.meta.glob<{ default: ImageMetadata }>(
 	'/src/assets/blogimages/**/*.{jpeg,jpg,png,gif}'
@@ -130,4 +136,13 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 			</div>
 		</article>
 	</main>
+
+	<!-- CTA Section -->
+	<CategoryCTA
+		category={category}
+		title={ctaTitle}
+		description={ctaDescription}
+		label={ctaLabel}
+		href={ctaHref}
+	/>
 </BaseLayout>
