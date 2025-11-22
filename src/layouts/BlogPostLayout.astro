@@ -53,7 +53,7 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 				class="app-container flex flex-col lg:flex-row-reverse justify-between gap-8 py-24 relative"
 			>
 				<div class="md:w-1/4 relative">
-					<div class="sticky top-0 md:top-28 hidden lg:block">
+					<div class="sticky top-0 md:top-28 hidden lg:block max-h-[calc(100vh-7rem-2rem)] overflow-y-auto overscroll-contain">
 						<TableOfContents headings={headings} />
 					</div>
 				</div>
