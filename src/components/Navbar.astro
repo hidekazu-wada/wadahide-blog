@@ -2,7 +2,8 @@
 import NavbarLink from './NavbarLink.astro'
 import { Icon } from 'astro-icon/components'
 import ThemeSelector from './ThemeSelector.astro'
-import { SITE_BASE, WebsiteLinks } from '../consts'
+import { SITE_BASE, Categories } from '../consts'
+import { getCollection } from 'astro:content'
 import LogoSVG from '../assets/logo.svg'
 
 const normalizeHref = (url: string) => {
@@ -16,6 +17,38 @@ const normalizeHref = (url: string) => {
 	const sanitizedPath = url.startsWith('/') ? url.slice(1) : url
 	return hasBase ? `${base}/${sanitizedPath}` : `/${sanitizedPath}`
 }
+
+// 記事のあるカテゴリーのスラッグを取得
+const allPosts = await getCollection('blog', ({ data }) => data.draft !== true)
+const categoriesWithPosts = new Set(
+	allPosts
+		.map((post) => post.data.category)
+		.filter((category): category is string => Boolean(category))
+)
+
+// 記事のあるカテゴリーのみを含むリンクリストを生成
+const categoryLinks = Categories.filter((cat) => categoriesWithPosts.has(cat.slug)).map(
+	(cat) => ({
+		name: cat.name,
+		url: `category/${cat.slug}`,
+	})
+)
+
+const WebsiteLinks = [
+	{
+		name: 'Home',
+		url: '/',
+	},
+	...categoryLinks,
+	{
+		name: 'Blog',
+		url: 'blog',
+	},
+	{
+		name: 'About',
+		url: 'about',
+	},
+]
 ---
 
 <header class="fixed top-0 w-full z-40 bg-background dark:bg-background-dark">

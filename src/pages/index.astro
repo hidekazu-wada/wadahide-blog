@@ -5,9 +5,17 @@ import { Icon } from 'astro-icon/components'
 import BlogCard from '../components/BlogCard.astro'
 import { getCollection } from 'astro:content'
 
-const posts = (await getCollection('blog', ({ data }) => data.draft !== true))
+const allPosts = (await getCollection('blog', ({ data }) => data.draft !== true))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-	.slice(0, 4)
+
+const posts = allPosts.slice(0, 4)
+
+// 記事のあるカテゴリーのスラッグを取得
+const categoriesWithPosts = new Set(
+	allPosts
+		.map((post) => post.data.category)
+		.filter((category): category is string => Boolean(category))
+)
 
 // WebSite structured data
 const websiteSchema = {
@@ -105,7 +113,9 @@ const organizationSchema = {
 		</div>
 		<div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
 			{
-				Categories.filter((cat) => cat.showOnHome !== false).map((category) => (
+				Categories.filter(
+					(cat) => cat.showOnHome !== false && categoriesWithPosts.has(cat.slug)
+				).map((category) => (
 					<a
 						class="border border-foreground/10 rounded-3xl p-6 flex flex-col gap-4 hover:-translate-y-1 hover:border-foreground/40 transition-transform duration-200"
 						href={`${SITE_BASE}/category/${category.slug}`}
