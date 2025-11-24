@@ -1,9 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" >
-  <rect x="0" y="0" width="32" height="32" rx="6" ry="6" fill="#333333"  />
-  <g stroke="#ffffff" stroke-width="4" stroke-linecap="round" fill="none" >
-    <line x1="8" y1="8" x2="8" y2="24"  />
-    <line x1="8" y1="16" x2="18" y2="16"  />
-    <line x1="18" y1="8" x2="18" y2="24"  />
-    <line x1="18" y1="24" x2="26" y2="24"  />
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect x="0" y="0" width="32" height="32" rx="6" ry="6" fill="#333333"></rect>
+  <g stroke="#ffffff" stroke-width="4" stroke-linecap="round" fill="none">
+    <line x1="8" y1="8" x2="8" y2="24"></line>
+    <line x1="8" y1="16" x2="18" y2="16"></line>
+    <line x1="18" y1="8" x2="18" y2="24"></line>
+    <line x1="18" y1="24" x2="26" y2="24"></line>
   </g>
-</svg>
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>
