@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import { Categories, SITE_BASE, SITE_TITLE, SocialLinks } from '../consts'
+import { Categories, SITE_BASE, SITE_TITLE, SocialLinks, CategorySlug } from '../consts'
 import { Icon } from 'astro-icon/components'
 import BlogCard from '../components/BlogCard.astro'
 import { getCollection } from 'astro:content'
@@ -11,10 +11,10 @@ const allPosts = (await getCollection('blog', ({ data }) => data.draft !== true)
 const posts = allPosts.slice(0, 4)
 
 // 記事のあるカテゴリーのスラッグを取得
-const categoriesWithPosts = new Set(
+const categoriesWithPosts = new Set<CategorySlug>(
 	allPosts
 		.map((post) => post.data.category)
-		.filter((category): category is string => Boolean(category))
+		.filter((category): category is CategorySlug => Boolean(category))
 )
 
 // WebSite structured data

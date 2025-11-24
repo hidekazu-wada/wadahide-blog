@@ -2,7 +2,7 @@
 import NavbarLink from './NavbarLink.astro'
 import { Icon } from 'astro-icon/components'
 import ThemeSelector from './ThemeSelector.astro'
-import { SITE_BASE, Categories } from '../consts'
+import { SITE_BASE, Categories, CategorySlug } from '../consts'
 import { getCollection } from 'astro:content'
 import LogoSVG from '../assets/logo.svg'
 
@@ -20,10 +20,10 @@ const normalizeHref = (url: string) => {
 
 // 記事のあるカテゴリーのスラッグを取得
 const allPosts = await getCollection('blog', ({ data }) => data.draft !== true)
-const categoriesWithPosts = new Set(
+const categoriesWithPosts = new Set<CategorySlug>(
 	allPosts
 		.map((post) => post.data.category)
-		.filter((category): category is string => Boolean(category))
+		.filter((category): category is CategorySlug => Boolean(category))
 )
 
 // 記事のあるカテゴリーのみを含むリンクリストを生成
