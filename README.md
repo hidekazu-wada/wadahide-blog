@@ -1,20 +1,17 @@
 # Saral Theme
 
 [![Built with Astro](https://astro.badg.es/v2/built-with-astro/tiny.svg)](https://astro.build)
-[![Lint, Format, and Type Check](https://github.com/yashjawale/saral-theme-astro/actions/workflows/lint.yml/badge.svg)](https://github.com/yashjawale/saral-theme-astro/actions/workflows/lint.yml)
-[![Deploy to GitHub Pages](https://github.com/yashjawale/saral-theme-astro/actions/workflows/deploy.yml/badge.svg)](https://github.com/yashjawale/saral-theme-astro/actions/workflows/deploy.yml)
+[![Lint, Format, and Type Check](https://github.com/hidekazu-wada/hidelog/actions/workflows/lint.yml/badge.svg)](https://github.com/hidekazu-wada/hidelog/actions/workflows/lint.yml)
 
 A simple & minimal theme for personal blog sites, crafted for Astro framework.
 
-View demo at [https://yashjawale.github.io/saral-theme-astro/](https://yashjawale.github.io/saral-theme-astro/)
-
-View in Astro themes at [https://astro.build/themes/details/saral/](https://astro.build/themes/details/saral/)
+View blog at [https://hidekazu-wada.github.io/hidelog/](https://hidekazu-wada.github.io/hidelog/)
 
 > Like what you see? Consider starring the repository 🌟
 
 ![Theme Screenshot](./screenshot.jpg)
 
-Derived from [yashjawale.github.io](https://yashjawale.github.io)
+HideLog - Personal blog built with Astro
 
 ## Custom categories & writing template
 
@@ -79,8 +76,8 @@ If no CTA overrides are provided, the defaults from the category definition are 
 - Create a PR & merge after passing workflow checks
 
 > [!TIP]
-> Facing any issues or want a feature? Feel free to create a new [issue](https://github.com/yashjawale/saral-theme-astro/issues)
+> Facing any issues or want a feature? Feel free to create a new [issue](https://github.com/hidekazu-wada/hidelog/issues)
 
 ---
 
-<a href="https://yashjawale.github.io/" target="_blank"><img style="height: 22px;" src="https://raw.githubusercontent.com/yashjawale/.github/main/docs/logo.svg" alt="Yash Jawale"/></a>
+<a href="https://hidekazu-wada.github.io/hidelog/" target="_blank">HideLog</a>

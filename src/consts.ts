@@ -1,7 +1,7 @@
 // Place any global data in this file.
 // You can import this data from anywhere in your site by using the `import` keyword.
 
-export const SITE_TITLE = 'Wadahide Experiments'
+export const SITE_TITLE = 'HideLog'
 export const SITE_DESCRIPTION =
 	'やりたいことをやりたいようにやってみる。ダイビング、筋トレ、コード、家族と暮らしの挑戦ログ。'
 
@@ -127,7 +127,7 @@ export const Categories: CategoryDefinition[] = [
 // If you deploy to a subdirectory, set the `WEBSITE_BASE` here.
 // e.g. '/blog' if you are deploying to example.com/blog
 // Leave it as an empty string if you are deploying to a root domain (e.g. example.com)
-export const SITE_BASE = ''
+export const SITE_BASE = '/hidelog'
 
 export const SocialLinks = [
 	{
