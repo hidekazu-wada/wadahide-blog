@@ -48,7 +48,7 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 const articleUrl = new URL(`/blog/${slug}/`, Astro.site)
 const coverImageUrl = blogImages[coverImagePath]
 	? new URL(
-			blogImages[coverImagePath]().src,
+			(await blogImages[coverImagePath]()).default.src,
 			Astro.site
 		)
 	: new URL('/saral-og.jpg', Astro.site)
