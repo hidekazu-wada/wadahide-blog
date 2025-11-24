@@ -8,9 +8,55 @@ import { getCollection } from 'astro:content'
 const posts = (await getCollection('blog', ({ data }) => data.draft !== true))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 4)
+
+// WebSite structured data
+const websiteSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: 'HideLog',
+	description:
+		'やりたいことをやりたいようにやってみる。ダイビング、筋トレ、コード、家族と暮らしの挑戦ログ。',
+	url: Astro.site?.toString() || '',
+	author: {
+		'@type': 'Person',
+		name: 'Hidekazu Wada',
+		url: 'https://blog.wadahide.com/about',
+	},
+	publisher: {
+		'@type': 'Organization',
+		name: 'HideLog',
+		logo: {
+			'@type': 'ImageObject',
+			url: new URL('/logo.svg', Astro.site).toString(),
+		},
+	},
+	potentialAction: {
+		'@type': 'SearchAction',
+		target: {
+			'@type': 'EntryPoint',
+			urlTemplate: `${Astro.site?.toString() || ''}/blog?q={search_term_string}`,
+		},
+		'query-input': 'required name=search_term_string',
+	},
+}
+
+// Organization structured data
+const organizationSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Organization',
+	name: 'HideLog',
+	url: Astro.site?.toString() || '',
+	logo: new URL('/logo.svg', Astro.site).toString(),
+	sameAs: SocialLinks.map((link) => link.url),
+}
 ---
 
 <BaseLayout title={SITE_TITLE}>
+	<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+	<script
+		type="application/ld+json"
+		set:html={JSON.stringify(organizationSchema)}
+	/>
 	<main
 		class="app-container flex flex-col gap-12 justify-center py-36 md:py-48 pt-44 md:pt-56 relative"
 	>

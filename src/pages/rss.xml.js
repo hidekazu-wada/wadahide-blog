@@ -8,7 +8,7 @@ export async function GET(context) {
 		title: 'HideLog',
 		// `<description>` field in output xml
 		description:
-			'A simple theme for personal blog sites, created for Astro framework',
+			'やりたいことをやりたいようにやってみる。ダイビング、筋トレ、コード、家族と暮らしの挑戦ログ。',
 		// Pull in your project "site" from the endpoint context
 		// https://docs.astro.build/en/reference/api-reference/#site
 		site: context.site,

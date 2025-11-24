@@ -44,9 +44,83 @@ const coverImagePath = `/src/assets/blogimages/${slug}/cover.jpg`
 const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 	.utc()
 	.format('D MMM YYYY')
+
+const articleUrl = new URL(`/blog/${slug}/`, Astro.site)
+const coverImageUrl = blogImages[coverImagePath]
+	? new URL(
+			blogImages[coverImagePath]().src,
+			Astro.site
+		)
+	: new URL('/saral-og.jpg', Astro.site)
+
+// Article structured data
+const articleSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	headline: title,
+	description: description,
+	image: coverImageUrl.toString(),
+	datePublished: pubDate.toISOString(),
+	dateModified: updatedDate ? updatedDate.toISOString() : pubDate.toISOString(),
+	author: {
+		'@type': 'Person',
+		name: 'Hidekazu Wada',
+		url: 'https://blog.wadahide.com/about',
+	},
+	publisher: {
+		'@type': 'Organization',
+		name: 'HideLog',
+		logo: {
+			'@type': 'ImageObject',
+			url: new URL('/logo.svg', Astro.site).toString(),
+		},
+	},
+	mainEntityOfPage: {
+		'@type': 'WebPage',
+		'@id': articleUrl.toString(),
+	},
+	url: articleUrl.toString(),
+}
+
+// BreadcrumbList structured data
+const breadcrumbSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: [
+		{
+			'@type': 'ListItem',
+			position: 1,
+			name: 'Home',
+			item: Astro.site?.toString() || '',
+		},
+		{
+			'@type': 'ListItem',
+			position: 2,
+			name: 'Blog',
+			item: new URL('/blog/', Astro.site).toString(),
+		},
+		{
+			'@type': 'ListItem',
+			position: 3,
+			name: title,
+			item: articleUrl.toString(),
+		},
+	],
+}
 ---
 
 <BaseLayout title={title} description={description}>
+	<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+	<!-- Article-specific meta tags -->
+	<meta property="og:type" content="article" />
+	<meta property="article:published_time" content={pubDate.toISOString()} />
+	{updatedDate && (
+		<meta property="article:modified_time" content={updatedDate.toISOString()} />
+	)}
+	{category && (
+		<meta property="article:section" content={category} />
+	)}
 	<main>
 		<article>
 			<div
@@ -82,7 +156,10 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 											name="mdi:calendar-refresh-outline"
 											class="inline-block text-primary dark:text-primary-dark"
 										/>
-										Last updated on <FormattedDate date={updatedDate} />
+										Last updated on{' '}
+										<time datetime={updatedDate.toISOString()}>
+											<FormattedDate date={updatedDate} />
+										</time>
 									</span>
 								)
 							}
