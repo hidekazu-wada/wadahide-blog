@@ -2,8 +2,8 @@
 title: '筋肉痛があるときの筋トレはOK？痛みを和らげる方法を解説'
 description: |
   筋肉痛があるときの筋トレは大丈夫？最新の運動生理学に基づき、筋肉痛のメカニズム、トレーニングの可否、痛みを和らげる方法、超回復との関係まで徹底解説。効率的な筋トレライフを送るための実践的なガイドです。
-pubDate: '2025-11-17'
-updatedDate: '2025-11-18'
+pubDate: '2025-11-30'
+updatedDate: '2025-11-30'
 coverImageCredit: ''
 category: 'strength'
 ctaTitle: ''
