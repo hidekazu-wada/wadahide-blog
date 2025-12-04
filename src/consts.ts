@@ -3,7 +3,7 @@
 
 export const SITE_TITLE = 'HideLog'
 export const SITE_DESCRIPTION =
-	'やりたいことをやりたいようにやってみる。ダイビング、筋トレ、コード、家族と暮らしの挑戦ログ。'
+	'やりたいことをやりたいようにやってみる。ダイビング、コード、家族と暮らしの挑戦ログ。'
 
 export const CATEGORY_SLUGS = [
 	'dive',
@@ -56,6 +56,7 @@ export const Categories: CategoryDefinition[] = [
 		ctaHref: '/blog',
 		ctaDescription:
 			'トレーニングのメニュー構成やフォーム改善の実験ログをまとめています。',
+		showOnHome: false,
 	},
 	{
 		slug: 'code',
