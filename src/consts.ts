@@ -3,7 +3,7 @@
 
 export const SITE_TITLE = 'HideLog'
 export const SITE_DESCRIPTION =
-	'やりたいことをやりたいようにやってみる。ダイビング、コード、家族と暮らしの挑戦ログ。'
+	'10年以上の経験を持つダイビングインストラクターが、安全に潜るための知識、器材選び、海外ダイビングのリアルな情報を実体験をもとに発信するブログ。'
 
 export const CATEGORY_SLUGS = [
 	'dive',
