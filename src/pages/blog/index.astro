@@ -13,7 +13,7 @@ const blogSchema = {
 	'@type': 'Blog',
 	name: 'HideLog',
 	description:
-		'やりたいことをやりたいようにやってみる。ダイビング、筋トレ、コード、家族と暮らしの挑戦ログ。',
+		'10年以上の経験を持つダイビングインストラクターが、安全に潜るための知識、器材選び、海外ダイビングのリアルな情報を実体験をもとに発信するブログ。',
 	url: new URL('/blog/', Astro.site).toString(),
 	author: {
 		'@type': 'Person',
@@ -63,13 +63,14 @@ const breadcrumbSchema = {
 
 <BaseLayout title="Blog">
 	<script type="application/ld+json" set:html={JSON.stringify(blogSchema)} />
-	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+	<script
+		type="application/ld+json"
+		set:html={JSON.stringify(breadcrumbSchema)}
+	/>
 	<main class="app-container pt-36">
 		<h1 class="text-6xl pb-8 font-bold">Blog</h1>
 		<p class="md:w-2/3 text-lg leading-[2rem]">
-			Welcome to my blog! Here you'll find a collection of my thoughts and
-			experiences. I hope you enjoy reading them as much as I enjoy writing
-			them.
+			10年以上の経験を持つダイビングインストラクターが、安全に潜るための知識、器材選び、海外ダイビングのリアルな情報を実体験をもとに発信しています。初心者から上級者まで、あなたのダイビングライフをサポートする記事をまとめています。
 		</p>
 	</main>
 	<section class="app-container py-12">

@@ -1,8 +1,49 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+
+// Person structured data
+const personSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: 'Hidekazu Wada',
+	url: new URL('/about/', Astro.site).toString(),
+	jobTitle: 'ダイビングインストラクター',
+	description:
+		'10年以上の経験を持つダイビングインストラクター。海外でのショップ運営や水族館での作業ダイバーとして活動。',
+	sameAs: [
+		'https://github.com/hidekazu-wada',
+		'https://x.com/SekainoWanchi',
+		'https://www.instagram.com/wadahidekazu/',
+	],
+}
+
+// BreadcrumbList structured data
+const breadcrumbSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: [
+		{
+			'@type': 'ListItem',
+			position: 1,
+			name: 'Home',
+			item: Astro.site?.toString() || '',
+		},
+		{
+			'@type': 'ListItem',
+			position: 2,
+			name: 'About Me',
+			item: new URL('/about/', Astro.site).toString(),
+		},
+	],
+}
 ---
 
-<BaseLayout title="About Me">
+<BaseLayout
+	title="About Me"
+	description="10年以上の経験を持つダイビングインストラクターhideの経歴と実績。海外でのショップ運営、水族館での作業ダイバー、有名人の講習担当など、豊富な経験を紹介します。"
+>
+	<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 	<main class="app-container pt-36">
 		<h1 class="text-6xl pb-2 font-bold">About Me</h1>
 	</main>

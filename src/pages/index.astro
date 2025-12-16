@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import { Categories, SITE_BASE, SITE_TITLE, SocialLinks } from '../consts'
+import { Categories, SITE_BASE, SITE_TITLE, SITE_DESCRIPTION, SocialLinks } from '../consts'
 import type { CategorySlug } from '../consts'
 import { Icon } from 'astro-icon/components'
 import BlogCard from '../components/BlogCard.astro'
@@ -60,7 +60,10 @@ const organizationSchema = {
 }
 ---
 
-<BaseLayout title={SITE_TITLE}>
+<BaseLayout
+	title={SITE_TITLE}
+	description={SITE_DESCRIPTION}
+>
 	<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 	<script
 		type="application/ld+json"
