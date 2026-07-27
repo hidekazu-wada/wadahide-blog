@@ -33,7 +33,7 @@ export type CategoryDefinition = {
 export const Categories: CategoryDefinition[] = [
 	{
 		slug: 'code',
-		name: 'Code & Teach',
+		name: 'Code & Tech',
 		tagline: '現役エンジニアの実装ログ',
 		description:
 			'Web制作、WordPressのトラブル復旧、SEO、Astro。現場で実際に手を動かした記録を、設計の視点から残します。',

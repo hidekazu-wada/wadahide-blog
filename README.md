@@ -21,7 +21,7 @@ The blog is organized around the following slugs defined in `src/consts.ts`:
 | ------------ | ------------- | -------------------------------------- |
 | `dive`       | Dive Life     | 安全と恐怖克服、海外ショップ運営       |
 | `strength`   | Strength Lab  | 週6筋トレの分割・栄養ログ              |
-| `code`       | Code & Teach  | プログラミング講師・現役エンジニア視点 |
+| `code`       | Code & Tech   | Web制作・WordPress復旧・SEO・Astro    |
 | `nature`     | Nature Living | 自然豊かな地域での暮らし方             |
 | `family`     | Family & Home | 夫婦生活、子育て、家づくり             |
 | `books`      | Books & Ideas | 読書ログと実践メモ                     |
