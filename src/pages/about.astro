@@ -7,9 +7,21 @@ const personSchema = {
 	'@type': 'Person',
 	name: 'Hidekazu Wada',
 	url: new URL('/about/', Astro.site).toString(),
-	jobTitle: 'ダイビングインストラクター',
+	jobTitle: 'Webエンジニア / 常務取締役・CIO',
 	description:
-		'10年以上の経験を持つダイビングインストラクター。海外でのショップ運営や水族館での作業ダイバーとして活動。',
+		'現役のWeb制作エンジニア。株式会社HAMAYOUリゾートの常務取締役・CIOとしてWeb・デジタル領域を統括。Web制作、Webアプリ開発、SEO改善、WordPressの復旧・セキュリティ対応を手がける。',
+	worksFor: {
+		'@type': 'Organization',
+		name: '株式会社HAMAYOUリゾート',
+	},
+	knowsAbout: [
+		'Web制作',
+		'Astro',
+		'WordPress',
+		'Webセキュリティ',
+		'SEO',
+		'Webアプリ開発',
+	],
 	sameAs: [
 		'https://github.com/hidekazu-wada',
 		'https://x.com/SekainoWanchi',
@@ -40,7 +52,7 @@ const breadcrumbSchema = {
 
 <BaseLayout
 	title="About Me"
-	description="10年以上の経験を持つダイビングインストラクターhideの経歴と実績。海外でのショップ運営、水族館での作業ダイバー、有名人の講習担当など、豊富な経験を紹介します。"
+	description="現役Web制作エンジニア／リゾート企業CIOのHideの経歴。Web制作、Astroリニューアル、Webアプリ開発、SEO改善、WordPressのハッキング復旧まで。設計から原因を解決するという仕事の考え方を紹介します。"
 >
 	<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
@@ -51,15 +63,63 @@ const breadcrumbSchema = {
 		<div
 			class="prose prose-neutral prose-lg md:prose-xl dark:prose-invert prose-img:rounded-xl prose-figure:text-center prose-img:mx-auto max-w-none"
 		>
-			<p class="text-2xl font-medium mb-6">こんにちは！</p>
+			<p class="text-2xl font-medium mb-6">こんにちは、Hideです。</p>
 
 			<p class="mb-6">
-				ダイビングインストラクターとして10年以上の経験を持つhideです。
+				現役のWeb制作エンジニアとして、Web制作・Webアプリ開発・SEOの分析改善を手がけています。あわせて、株式会社HAMAYOUリゾートの常務取締役・CIOとして、会社のWeb・デジタル領域全般を統括しています。
 			</p>
 
-			<h2 class="text-3xl font-bold mt-12 mb-6">🌟 私のダイビング経歴</h2>
+			<h2 class="text-3xl font-bold mt-12 mb-6">仕事の考え方</h2>
 
-			<h3 class="text-2xl font-semibold mt-8 mb-4">海外でのショップ立ち上げ</h3>
+			<p class="mb-6">
+				「作ってもらったのに、成果に繋がらない」——Web制作やSEOで、そんな経験はありませんか。
+			</p>
+
+			<p class="mb-6">
+				多くの場合、原因は見た目ではなく、その手前の<strong>設計</strong>と、その後の<strong>育て方</strong>にあります。何のために、誰に、どう届けるか。そこが曖昧なまま作り、作りっぱなしにすると、表面が整っても結果は動きません。
+			</p>
+
+			<p class="mb-6">
+				だから私は、<strong>設計 → データで答え合わせ → 育てる</strong>という順番を一本の芯にしています。リサーチからユーザー自身も言葉にできていない本当のニーズを掘り当て、そこから設計する。公開後はデータで答え合わせをして、改善を重ねながら育てていく。そこまでを含めて「設計」だと考えています。
+			</p>
+
+			<p class="mb-6">
+				この姿勢は、目に見えるトラブル対応でも同じです。先日は、ハッキングで乗っ取られたサイトを、サーバーのアクセスログから侵入経路を秒単位で突き止め、仕込まれていた遠隔操作用のプログラムを解読・除去し、原因ごと塞いで当日中に復旧させました。表面を直すだけでは、また同じことが起きるからです。
+			</p>
+
+			<h2 class="text-3xl font-bold mt-12 mb-6">できること</h2>
+
+			<ul class="mb-6">
+				<li>
+					<strong>Web制作（コーポレート / LP / EC）</strong> — ゴールから逆算した設計で
+				</li>
+				<li>
+					<strong>Astroでの制作・リニューアル</strong> — 速く、狙われにくいサイトへ。自社サイトをWordPressからAstroへ刷新した実績
+				</li>
+				<li>
+					<strong>Webアプリ開発</strong> — 課題の本質から設計・実装。データ可視化で意思決定を支える
+				</li>
+				<li>
+					<strong>SEO分析・改善</strong> — 順位ではなく「流入しない原因」をデータから特定して育てる
+				</li>
+				<li>
+					<strong>WordPressの復旧・保守・セキュリティ対応</strong> — 白画面、ログイン不可から、改ざん・乗っ取りの復旧と再発防止まで
+				</li>
+			</ul>
+
+			<h2 class="text-3xl font-bold mt-12 mb-6">HAMAYOUリゾートでの仕事</h2>
+
+			<p class="mb-6">
+				TEC事業部を統括し、次のような取り組みを進めてきました。自社Webサイトを構築後にAstroへリニューアルし、表示速度と安全性を重視した設計に刷新。現場責任者が「現場利益・施策の進捗・前年同期比」を数字とグラフで確認できるWebアプリを企画・開発。あわせて、アクセス解析とSEOによる集客改善、Google
+				Workspaceの全社導入、生成AIの業務活用によるDXを推進しています。自社サイトのセキュリティ対策・保守・トラブル対応も担当しています。
+			</p>
+
+			<h2 class="text-3xl font-bold mt-12 mb-6">もうひとつの顔</h2>
+
+			<p class="mb-6">
+				エンジニアになる前は、ダイビングインストラクターとして10年以上活動していました。海外で仲間とダイビングショップを立ち上げて数年間運営し、初心者から上級者まで多くのダイバーを指導。現在も水族館の水中清掃などの業務に関わっています。
+			</p>
+
 			<figure class="my-8">
 				<img
 					src="/about/all-blue-shop.JPG"
@@ -71,26 +131,21 @@ const breadcrumbSchema = {
 					CLUB」での様子
 				</figcaption>
 			</figure>
+
 			<p class="mb-6">
-				海外でダイビングショップを仲間と共に立ち上げ、数年間運営してきました。その中で多くのダイバーを指導し、初心者から上級者まで幅広くサポートしてきました。
+				畑違いに見えるかもしれませんが、根っこは同じだと思っています。ダイビングで一番大事なのは、器材の使い方を覚えることではなく、「なぜこの手順なのか」を理解して、トラブルが起きる前に潰しておくことです。人に教える仕事を長くやってきたことは、専門用語を使わずに説明する力として、今の仕事にそのまま残っています。
 			</p>
 
-			<h3 class="text-2xl font-semibold mt-8 mb-4">水族館での作業ダイバー</h3>
+			<h2 class="text-3xl font-bold mt-12 mb-6">このブログについて</h2>
+
 			<p class="mb-6">
-				現在は水族館の水中清掃などの業務も行っており、特殊な環境でのダイビング経験も豊富です。
+				HideLogでは、Web制作やWordPressのトラブル対応で実際に手を動かした記録を中心に、ダイビング、トレーニング、自然のそばでの暮らしまで、実体験にもとづいて書いています。とくに技術記事は、教科書的な手順ではなく「実際に起きたこと」と「そのとき何を見て判断したか」を残すようにしています。
 			</p>
 
-			<h2 class="text-3xl font-bold mt-12 mb-6">👤 特別な経験</h2>
-
-			<h3 class="text-2xl font-semibold mt-8 mb-4">有名人の講習担当</h3>
 			<p class="mb-6">
-				これまでにお笑い芸人のNON
-				STYLE井上さんをはじめ、著名な方々のダイビング講習も担当させていただきました。（井上さんご本人の許可をいただいております！）
-			</p>
-
-			<h2 class="text-3xl font-bold mt-12 mb-6">🔍 このブログについて</h2>
-			<p class="mb-6">
-				このブログでは、私が培ってきた実体験をもとに、ダイビングの魅力や役立つ情報をお届けします。初心者の方も安心して楽しめるよう、わかりやすく丁寧に解説していきますので、ぜひゆっくりご覧ください！
+				Web制作、サイトの不具合や改ざんの復旧、SEOの改善などのご相談は、<a
+					href="mailto:info@wadahide.com?subject=お問い合わせ">info@wadahide.com</a
+				>までお気軽にどうぞ。まずは、今お困りのことや実現したいことを、ざっくりで構いませんのでお聞かせください。一緒に、原因から考えて、育てるところまで伴走します。
 			</p>
 		</div>
 	</section>

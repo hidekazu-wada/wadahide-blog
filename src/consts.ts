@@ -3,12 +3,12 @@
 
 export const SITE_TITLE = 'HideLog'
 export const SITE_DESCRIPTION =
-	'10年以上の経験を持つダイビングインストラクターが、安全に潜るための知識、器材選び、海外ダイビングのリアルな情報を実体験をもとに発信するブログ。'
+	'現役エンジニア／リゾート企業のCIOが、Web制作・WordPress復旧・SEOの実践知を中心に、ダイビングやトレーニング、暮らしの実験ログまで発信するブログ。'
 
 export const CATEGORY_SLUGS = [
+	'code',
 	'dive',
 	'strength',
-	'code',
 	'nature',
 	'family',
 	'books',
@@ -31,6 +31,20 @@ export type CategoryDefinition = {
 }
 
 export const Categories: CategoryDefinition[] = [
+	{
+		slug: 'code',
+		name: 'Code & Teach',
+		tagline: '現役エンジニアの実装ログ',
+		description:
+			'Web制作、WordPressのトラブル復旧、SEO、Astro。現場で実際に手を動かした記録を、設計の視点から残します。',
+		summary: 'WordPress復旧、セキュリティ、Astro、SEO設計。',
+		focus: ['WordPress復旧・セキュリティ', 'Astroとパフォーマンス', 'SEOと設計'],
+		ctaLabel: 'Webの相談をする',
+		ctaHref:
+			'mailto:info@wadahide.com?subject=Web制作・トラブル対応のご相談',
+		ctaDescription:
+			'Web制作、WordPressの復旧・保守、SEO改善のご相談を受け付けています。',
+	},
 	{
 		slug: 'dive',
 		name: 'Dive Life',
@@ -57,19 +71,6 @@ export const Categories: CategoryDefinition[] = [
 		ctaDescription:
 			'トレーニングのメニュー構成やフォーム改善の実験ログをまとめています。',
 		showOnHome: false,
-	},
-	{
-		slug: 'code',
-		name: 'Code & Teach',
-		tagline: '現役エンジニア × プログラミング講師',
-		description:
-			'講師経験と現場での開発を掛け合わせ、学習ロードマップや案件の進め方を記録します。',
-		summary: '指導ノウハウ、現場視点、学習プラン、ツール紹介。',
-		focus: ['講師としての教え方', '現役エンジニア視点', '学習ロードマップ'],
-		ctaLabel: '学習サポートの相談',
-		ctaHref: 'mailto:info@wadahide.com?subject=Code%20%26%20Teach%20について',
-		ctaDescription:
-			'学習ロードマップ作りや講師向けの教材化など、お気軽にご相談ください。',
 	},
 	{
 		slug: 'nature',
