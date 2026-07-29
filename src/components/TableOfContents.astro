@@ -3,9 +3,11 @@ import type { MarkdownHeading } from 'astro'
 
 interface Props {
 	headings: MarkdownHeading[]
+	/** 折りたたみ内などで使うとき、見出しと余白を詰める */
+	compact?: boolean
 }
 
-const { headings } = Astro.props
+const { headings, compact = false } = Astro.props
 
 // Group headings: h2 as top-level, h3 as nested under previous h2
 interface TOCHeading extends MarkdownHeading {
@@ -25,12 +27,18 @@ for (const heading of headings) {
 
 {
 	toc.length > 0 ? (
-		<nav class="py-12 rounded">
-			<h2 class="text-2xl mr-2 pb-1 mb-3 font-bold">On This Page</h2>
-			<ul class="space-y-3">
+		<nav class={compact ? '' : 'py-12 rounded'} data-toc>
+			{!compact && (
+				<h2 class="text-2xl mr-2 pb-1 mb-3 font-bold">On This Page</h2>
+			)}
+			<ul class={compact ? 'space-y-2' : 'space-y-3'}>
 				{toc.map((h2) => (
 					<li>
-						<a class="hover:underline underline-offset-4" href={`#${h2.slug}`}>
+						<a
+							class="toc-link hover:underline underline-offset-4"
+							href={`#${h2.slug}`}
+							data-toc-link={h2.slug}
+						>
 							{h2.text}
 						</a>
 						{h2.children.length > 0 && (
@@ -38,8 +46,9 @@ for (const heading of headings) {
 								{h2.children.map((h3) => (
 									<li>
 										<a
-											class="hover:underline underline-offset-4 text-sm opacity-80"
+											class="toc-link hover:underline underline-offset-4 text-sm opacity-80"
 											href={`#${h3.slug}`}
+											data-toc-link={h3.slug}
 										>
 											{h3.text}
 										</a>
@@ -55,3 +64,79 @@ for (const heading of headings) {
 		<div />
 	)
 }
+
+<style is:global>
+	.toc-link {
+		display: inline-block;
+		border-left: 2px solid transparent;
+		margin-left: -0.75rem;
+		padding-left: 0.625rem;
+		transition:
+			border-color 0.15s ease,
+			opacity 0.15s ease;
+	}
+	.toc-link.is-active {
+		border-left-color: currentColor;
+		opacity: 1;
+		font-weight: 600;
+	}
+</style>
+
+<script>
+	// 現在読んでいる見出しを目次でハイライトする
+	const setup = () => {
+		const links = Array.from(
+			document.querySelectorAll<HTMLAnchorElement>('[data-toc-link]')
+		)
+		if (links.length === 0) return
+
+		const targets = links
+			.map((link) => document.getElementById(link.dataset.tocLink || ''))
+			.filter((el): el is HTMLElement => el !== null)
+		if (targets.length === 0) return
+
+		const visible = new Set<string>()
+
+		const highlight = () => {
+			// 画面内にある見出しのうち、最も上のものを現在地とする
+			let currentId: string | null = null
+			for (const target of targets) {
+				if (visible.has(target.id)) {
+					currentId = target.id
+					break
+				}
+			}
+			// 画面内に見出しが無いときは、直近で通り過ぎたものを使う
+			if (!currentId) {
+				for (const target of targets) {
+					if (target.getBoundingClientRect().top < 120) {
+						currentId = target.id
+					}
+				}
+			}
+			links.forEach((link) => {
+				link.classList.toggle(
+					'is-active',
+					link.dataset.tocLink === currentId
+				)
+			})
+		}
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) visible.add(entry.target.id)
+					else visible.delete(entry.target.id)
+				})
+				highlight()
+			},
+			{ rootMargin: '-100px 0px -70% 0px' }
+		)
+
+		targets.forEach((target) => observer.observe(target))
+		highlight()
+	}
+
+	setup()
+	document.addEventListener('astro:after-swap', setup)
+</script>

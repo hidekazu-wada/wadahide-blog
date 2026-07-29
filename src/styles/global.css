@@ -48,3 +48,182 @@ html {
 .prose iframe {
 	@apply my-16 mx-auto w-11/12 aspect-video rounded-xl;
 }
+
+/* ------------------------------------------------------------------
+   読了プログレスバー
+   ------------------------------------------------------------------ */
+#reading-progress {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 3px;
+	width: 100%;
+	transform: scaleX(0);
+	transform-origin: 0 50%;
+	background: var(--color-primary);
+	z-index: 60;
+	pointer-events: none;
+	transition: transform 0.1s linear;
+}
+
+.dark #reading-progress {
+	background: var(--color-primary-dark);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#reading-progress {
+		transition: none;
+	}
+}
+
+/* ------------------------------------------------------------------
+   コードブロックのコピーボタン
+   ------------------------------------------------------------------ */
+.prose pre {
+	position: relative;
+}
+
+.copy-code-button {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	padding: 0.25rem 0.625rem;
+	font-size: 0.75rem;
+	font-family: var(--font-sans);
+	line-height: 1.5;
+	border-radius: 0.375rem;
+	border: 1px solid rgb(255 255 255 / 0.25);
+	background: rgb(255 255 255 / 0.1);
+	color: rgb(255 255 255 / 0.85);
+	cursor: pointer;
+	opacity: 0;
+	transition:
+		opacity 0.15s ease,
+		background 0.15s ease;
+}
+
+.prose pre:hover .copy-code-button,
+.copy-code-button:focus-visible {
+	opacity: 1;
+}
+
+.copy-code-button:hover {
+	background: rgb(255 255 255 / 0.2);
+}
+
+.copy-code-button.is-copied {
+	background: var(--color-primary);
+	border-color: transparent;
+	color: #fff;
+	opacity: 1;
+}
+
+/* タッチ端末ではホバーが無いので常時表示 */
+@media (hover: none) {
+	.copy-code-button {
+		opacity: 1;
+	}
+}
+
+/* ------------------------------------------------------------------
+   Callout（注意・ポイントの囲み）
+   記事内では次のように書く:
+   <aside class="callout callout-warn"><p><strong>注意</strong></p><p>本文</p></aside>
+   種類: callout-note / callout-tip / callout-warn / callout-danger
+   ------------------------------------------------------------------ */
+.prose .callout {
+	--callout-color: var(--color-primary);
+	margin: 2rem 0;
+	padding: 1.25rem 1.5rem;
+	border-left: 4px solid var(--callout-color);
+	border-radius: 0.5rem;
+	background: color-mix(in srgb, var(--callout-color) 8%, transparent);
+	font-size: 0.95em;
+}
+
+.dark .prose .callout {
+	background: color-mix(in srgb, var(--callout-color) 14%, transparent);
+}
+
+.prose .callout > :first-child {
+	margin-top: 0;
+}
+
+.prose .callout > :last-child {
+	margin-bottom: 0;
+}
+
+.prose .callout p {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.prose .callout > p:first-child strong {
+	color: var(--callout-color);
+}
+
+.prose .callout-note {
+	--callout-color: var(--color-primary);
+}
+
+.prose .callout-tip {
+	--callout-color: #0d9488;
+}
+
+.prose .callout-warn {
+	--callout-color: #d97706;
+}
+
+.prose .callout-danger {
+	--callout-color: #dc2626;
+}
+
+.dark .prose .callout-note {
+	--callout-color: var(--color-primary-dark);
+}
+
+.dark .prose .callout-tip {
+	--callout-color: #5eead4;
+}
+
+.dark .prose .callout-warn {
+	--callout-color: #fbbf24;
+}
+
+.dark .prose .callout-danger {
+	--callout-color: #fca5a5;
+}
+
+/* ------------------------------------------------------------------
+   モバイル用の折りたたみ目次
+   ------------------------------------------------------------------ */
+#mobile-toc {
+	@apply lg:hidden mb-10 rounded-xl border border-foreground/15 dark:border-foreground-dark/20;
+}
+
+#mobile-toc > summary {
+	@apply cursor-pointer select-none px-5 py-4 font-semibold flex items-center justify-between gap-2 list-none;
+}
+
+#mobile-toc > summary::-webkit-details-marker {
+	display: none;
+}
+
+#mobile-toc > summary::after {
+	content: '';
+	width: 0.6rem;
+	height: 0.6rem;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: rotate(45deg);
+	transition: transform 0.2s ease;
+	flex-shrink: 0;
+}
+
+#mobile-toc[open] > summary::after {
+	transform: rotate(-135deg);
+}
+
+#mobile-toc .mobile-toc-body {
+	@apply px-5 pb-5 pt-1;
+}

@@ -121,8 +121,11 @@ const breadcrumbSchema = {
 	{category && (
 		<meta property="article:section" content={category} />
 	)}
+
+	<div id="reading-progress" aria-hidden="true"></div>
+
 	<main>
-		<article>
+		<article data-article>
 			<div
 				class="app-container flex flex-col lg:flex-row-reverse justify-between gap-8 py-24 relative"
 			>
@@ -191,6 +194,19 @@ const breadcrumbSchema = {
 							)
 						}
 					</div>
+
+					<!-- モバイル用の折りたたみ目次（PCではサイドバーの追従目次を使う） -->
+					{
+						headings.some((h) => h.depth === 2) && (
+							<details id="mobile-toc">
+								<summary>目次から探す</summary>
+								<div class="mobile-toc-body">
+									<TableOfContents headings={headings} compact />
+								</div>
+							</details>
+						)
+					}
+
 					<div
 						class="prose prose-neutral prose-lg md:prose-xl dark:prose-invert prose-img:rounded-xl prose-figure:text-center prose-img:mx-auto"
 					>
@@ -225,3 +241,86 @@ const breadcrumbSchema = {
 		href={ctaHref}
 	/>
 </BaseLayout>
+
+<script>
+	// --- 読了プログレスバー ---
+	const setupProgress = () => {
+		const bar = document.getElementById('reading-progress')
+		const article = document.querySelector<HTMLElement>('[data-article]')
+		if (!bar || !article) return
+
+		let ticking = false
+		const update = () => {
+			const start = article.offsetTop
+			const total = article.offsetHeight - window.innerHeight
+			const current = window.scrollY - start
+			const ratio = total > 0 ? Math.min(Math.max(current / total, 0), 1) : 0
+			bar.style.transform = `scaleX(${ratio})`
+			ticking = false
+		}
+		const onScroll = () => {
+			if (!ticking) {
+				ticking = true
+				requestAnimationFrame(update)
+			}
+		}
+
+		window.addEventListener('scroll', onScroll, { passive: true })
+		window.addEventListener('resize', onScroll)
+		update()
+	}
+
+	// --- コードブロックのコピーボタン ---
+	const setupCopyButtons = () => {
+		const blocks = document.querySelectorAll<HTMLPreElement>('.prose pre')
+		blocks.forEach((pre) => {
+			if (pre.querySelector('.copy-code-button')) return
+
+			const button = document.createElement('button')
+			button.type = 'button'
+			button.className = 'copy-code-button'
+			button.textContent = 'コピー'
+			button.setAttribute('aria-label', 'コードをコピー')
+
+			button.addEventListener('click', async () => {
+				const code = pre.querySelector('code')?.innerText ?? pre.innerText
+				try {
+					await navigator.clipboard.writeText(code.trim())
+					button.textContent = 'コピーしました'
+					button.classList.add('is-copied')
+					window.setTimeout(() => {
+						button.textContent = 'コピー'
+						button.classList.remove('is-copied')
+					}, 1800)
+				} catch {
+					button.textContent = '失敗しました'
+					window.setTimeout(() => {
+						button.textContent = 'コピー'
+					}, 1800)
+				}
+			})
+
+			pre.appendChild(button)
+		})
+	}
+
+	// --- モバイル目次: リンクを押したら閉じる ---
+	const setupMobileToc = () => {
+		const toc = document.getElementById('mobile-toc')
+		if (!toc) return
+		toc.querySelectorAll('a').forEach((link) => {
+			link.addEventListener('click', () => {
+				toc.removeAttribute('open')
+			})
+		})
+	}
+
+	const init = () => {
+		setupProgress()
+		setupCopyButtons()
+		setupMobileToc()
+	}
+
+	init()
+	document.addEventListener('astro:after-swap', init)
+</script>
