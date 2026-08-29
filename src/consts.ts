@@ -3,7 +3,7 @@
 
 export const SITE_TITLE = 'HideLog'
 export const SITE_DESCRIPTION =
-	'現役エンジニア／リゾート企業のCIOが、Web制作・WordPress復旧・SEOの実践知を中心に、ダイビングやトレーニング、暮らしの実験ログまで発信するブログ。'
+	'WordPressの復旧やサーバー、SEO、Astroなど、Web制作の現場で実際に手を動かして分かったことを書いています。ダイビングやトレーニング、暮らしの記録も。'
 
 export const CATEGORY_SLUGS = [
 	'code',

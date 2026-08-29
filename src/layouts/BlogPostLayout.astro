@@ -51,7 +51,7 @@ const coverImageUrl = blogImages[coverImagePath]
 			(await blogImages[coverImagePath]()).default.src,
 			Astro.site
 		)
-	: new URL('/saral-og.jpg', Astro.site)
+	: new URL('/og-default.jpg', Astro.site)
 
 // Article structured data
 const articleSchema = {
